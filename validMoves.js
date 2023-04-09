@@ -1,22 +1,24 @@
 import getBuilderLocations from "./getBuilderLocations.js"
 
-// this helper function takes in the player value and the board, and returns an object with placement as key and all valid movement tiles in an array as value for each valid builder
+// this helper function takes in the player value and the board, 
+// and returns an object with placement as key and all valid movement tiles
+// in an array as value for each valid builder
 // e.g. [[0, 0, 0, 0, 0],
 //       [0, 4, 0, 3, 0],
 //       [0, 0, 21, 0, 0],
 //       [0, 2, 10, 1, 0],
 //       [0, 0, 0, 20, 11]]
-// and player value = 20 would return: 
-// const obj = {
-//     0: {
-//         "location": [2, 2],
-//         "validMoves": [[1, 2], [2, 1], [2, 3], [3, 1], [3, 3]]
-//     },
-//     1: {
-//         "location": "[4, 3]",
-//         "validMoves": [[3, 3], [3, 4], [4, 2]]
-//     },
-// }
+// and player value = 20 would return the object:
+//     {
+//         0: {
+//             "location": [2, 2],
+//             "validMoves": [[1, 2], [2, 1], [2, 3], [3, 1], [3, 3]]
+//         },
+//         1: {
+//             "location": "[4, 3]",
+//             "validMoves": [[3, 3], [3, 4], [4, 2]]
+//         },
+//      }
 
 
 const validMoves = (playerValue, grid) => {

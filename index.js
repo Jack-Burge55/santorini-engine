@@ -5,4 +5,4 @@ const grid = [[0, 0, 0, 0, 0],
 [0, 2, 10, 1, 0],
 [0, 0, 0, 20, 11]]
 const playerValue = 20
-console.log(validMoves(playerValue, grid)[1])
+console.log(validMoves(playerValue, grid))
