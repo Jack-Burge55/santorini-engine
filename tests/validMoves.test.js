@@ -1,4 +1,4 @@
-import validMoves from "../validMoves.js";
+import validMoves from "../src/utilities/validMoves.js";
 
 describe('validMoves', () => {
     it('should return an object of builders with locations and an array of valid moves', () => {

@@ -1,4 +1,4 @@
-import validMoves from "./validMoves.js";
+import validMoves from "./utilities/validMoves.js";
 const grid = [[0, 0, 0, 0, 0],
 [0, 4, 0, 3, 0],
 [0, 0, 21, 0, 0],

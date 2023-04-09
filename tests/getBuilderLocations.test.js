@@ -1,4 +1,4 @@
-import getBuilderLocations from "../getBuilderLocations.js"
+import getBuilderLocations from "../src/utilities/getBuilderLocations.js"
 
 describe('getBuilderLocations', () => {
   it('should return an array of builder locations given player value', () => {
