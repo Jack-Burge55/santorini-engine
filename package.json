@@ -1,0 +1,21 @@
+{
+  "name": "santorini-engine",
+  "version": "1.0.0",
+  "description": "This will be the engine for santorini",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jack-Burge55/santorini-engine.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jack-Burge55/santorini-engine/issues"
+  },
+  "homepage": "https://github.com/Jack-Burge55/santorini-engine#readme"
+}
