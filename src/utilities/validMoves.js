@@ -38,7 +38,7 @@ const validMoves = (playerValue, grid) => {
         // then filter adjacentTiles by validity to move to them
         const validAdjacent = adjacentTiles.filter(tile => {
             const gridTile = grid[tile[0]][tile[1]]
-            return ((gridTile < 3 && (gridTile - (grid[location[0]][location[1]] - playerValue)) < 2))
+            return ((gridTile < 4 && (gridTile - (grid[location[0]][location[1]] - playerValue)) < 2))
         })
         // and add builder locations and valid moves to validMovesObject
         validMovesObject[builderIndex] = {
