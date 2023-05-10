@@ -6,20 +6,19 @@ import validBuilds from "../utilities/validBuilds.js";
 const randomPlay = (playerValue, grid) => {
     // get useful variables
     const validMovesObject = validMoves(playerValue, grid)
-    const validMovesObjectKeys = Object.keys(validMovesObject)
 
     // get all builders with at least one possible move
-    const filteredValidMovesObjectKeys = validMovesObjectKeys.filter(moveKey=> {
+    const filteredValidMovesObjectKeys = Object.keys(validMovesObject).filter(moveKey=> {
         return validMovesObject[moveKey].validMoves.length !== 0
     })
 
-    // update with losing status
+    // check losing status
     if (filteredValidMovesObjectKeys.length === 0) {
         return [-1, grid];
     }
 
     // get random eligible builder 
-    const randomBuilder = Math.floor(Math.random() * filteredValidMovesObjectKeys.length)
+    const randomBuilder = filteredValidMovesObjectKeys[Math.floor(Math.random() * filteredValidMovesObjectKeys.length)]
     const builderLocation = validMovesObject[randomBuilder].location
     const builderMoveset = validMovesObject[randomBuilder].validMoves
 
@@ -30,7 +29,7 @@ const randomPlay = (playerValue, grid) => {
     grid[builderLocation[0]][builderLocation[1]] -= playerValue
     grid[randomMove[0]][randomMove[1]] += playerValue
 
-    // check winning move
+    // check winning status
     if (grid[randomMove[0]][randomMove[1]] === (playerValue + 3)) {
         return [1, grid]
     }
