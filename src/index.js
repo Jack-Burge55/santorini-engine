@@ -1,24 +1,43 @@
 import randomPlay from "./engines/randomPlay.js";
 
 let grid = [
-[3, 3, 3, 0, 0],
-[3, 10, 3, 0, 0],
-[3, 3, 3, 0, 0],
 [0, 0, 0, 0, 0],
-[0, 0, 0, 20, 0]]
-const playerValue = 20
-let turnOutcome
-turnOutcome = randomPlay(playerValue, grid);
-if (turnOutcome[0] === 1) {
-    console.log(playerValue, "wins! Final grid below:");
-    console.log(turnOutcome[1]);
-}
-if (turnOutcome[0] === -1) {
-    console.log(playerValue, "is eliminated! Grid below:");
-    console.log(grid);
-}
-if (turnOutcome[0] === 0) {
-    grid = turnOutcome[1]
-    console.log("Current grid below:");
-    console.log(grid);
+[0, 0, 0, 0, 0],
+[0, 0, 10, 0, 0],
+[0, 0, 20, 0, 0],
+[0, 0, 0, 0, 0]]
+
+let winner
+let currentPlayer
+let currentPlayerIndex = 0
+let remainingPlayers = [10, 20]
+while (!winner) {
+    let turnOutcome
+    currentPlayer =  remainingPlayers[currentPlayerIndex]
+    turnOutcome = randomPlay(currentPlayer, grid);
+    // if winning turn occured
+    if (turnOutcome[0] === 1) {
+        winner = currentPlayer
+        console.log(currentPlayer, "wins! Final grid below:");
+        console.log(turnOutcome[1]);
+    }
+    // if player eliminated
+    if (turnOutcome[0] === -1) {
+        const removedPlayer = remainingPlayers.indexOf(currentPlayer)
+        remainingPlayers.splice(removedPlayer, 1)
+        if (remainingPlayers.length === 1) {
+            winner = remainingPlayers[0]
+            console.log(remainingPlayers[0], "wins! Final grid below:");
+        } else {
+            console.log(currentPlayer, "is eliminated! Grid below:");
+        }
+        console.log(grid);
+    }
+    // if uneventful turn
+    if (turnOutcome[0] === 0) {
+        grid = turnOutcome[1]
+        console.log("Current grid below:");
+        console.log(grid);
+        currentPlayerIndex = (currentPlayerIndex + 1) % remainingPlayers.length
+    }
 }
