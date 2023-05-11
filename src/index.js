@@ -2,19 +2,17 @@ import randomPlay from "./engines/randomPlay.js";
 
 let grid = [
 [0, 0, 0, 0, 0],
+[0, 20, 0, 20, 0],
 [0, 0, 0, 0, 0],
-[0, 0, 10, 0, 0],
-[0, 0, 20, 0, 0],
+[0, 10, 0, 10, 0],
 [0, 0, 0, 0, 0]]
 
 let winner
-let currentPlayer
+let currentPlayer = 10
 let currentPlayerIndex = 0
 let remainingPlayers = [10, 20]
 while (!winner) {
-    let turnOutcome
-    currentPlayer =  remainingPlayers[currentPlayerIndex]
-    turnOutcome = randomPlay(currentPlayer, grid);
+    const turnOutcome = randomPlay(currentPlayer, grid);
     // if winning turn occured
     if (turnOutcome[0] === 1) {
         winner = currentPlayer
@@ -32,6 +30,8 @@ while (!winner) {
             console.log(currentPlayer, "is eliminated! Grid below:");
         }
         console.log(grid);
+        currentPlayerIndex = currentPlayerIndex % remainingPlayers.length
+        currentPlayer = remainingPlayers[currentPlayerIndex]
     }
     // if uneventful turn
     if (turnOutcome[0] === 0) {
@@ -39,5 +39,6 @@ while (!winner) {
         console.log("Current grid below:");
         console.log(grid);
         currentPlayerIndex = (currentPlayerIndex + 1) % remainingPlayers.length
+        currentPlayer = remainingPlayers[currentPlayerIndex]
     }
 }
