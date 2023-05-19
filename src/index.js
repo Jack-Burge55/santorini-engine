@@ -1,4 +1,5 @@
 import randomPlay from "./engines/randomPlay.js";
+import greedyHeight from "./engines/greedyHeight.js";
 
 let grid = [
 [0, 0, 0, 0, 0],
@@ -12,7 +13,8 @@ let currentPlayer = 10
 let currentPlayerIndex = 0
 let remainingPlayers = [10, 20]
 while (!winner) {
-    const turnOutcome = randomPlay(currentPlayer, grid);
+    const turnOutcome = greedyHeight(currentPlayer, grid);
+    console.log("------------------------------------");
     // if winning turn occured
     if (turnOutcome[0] === 1) {
         winner = currentPlayer
