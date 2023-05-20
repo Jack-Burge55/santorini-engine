@@ -40,10 +40,12 @@ const validMoves = (playerValue, grid) => {
             const gridTile = grid[tile[0]][tile[1]]
             return ((gridTile < 4 && (gridTile - (grid[location[0]][location[1]] - playerValue)) < 2))
         })
-        // and add builder locations and valid moves to validMovesObject
-        validMovesObject[builderIndex] = {
-            "location": location,
-            "validMoves": validAdjacent
+        // and add builder locations and valid moves to validMovesObject if moves available
+        if (validAdjacent.length) {
+            validMovesObject[builderIndex] = {
+                "location": location,
+                "validMoves": validAdjacent
+            }
         }
     })
     return validMovesObject;
