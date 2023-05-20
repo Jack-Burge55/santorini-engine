@@ -93,6 +93,23 @@ describe('validMoves', () => {
     } 
   expect(validMoves(playerValue, grid)).toEqual(validMoveObject)
   })
+
+  it('should not return a key value pair for a builder with no current valid moves', () => {
+    const grid = [[0, 0, 0, 0, 0],
+    [0, 4, 0, 3, 0],
+    [0, 0, 20, 0, 0],
+    [0, 2, 10, 3, 2],
+    [0, 0, 0, 2, 20]]
+    const playerValue = 20
+  const validMoveObject =
+    {
+        0: {
+            "location": [2, 2],
+            "validMoves": [[1, 2], [2, 1], [2, 3]]
+        }
+    } 
+  expect(validMoves(playerValue, grid)).toEqual(validMoveObject)
+  })
 })
 
 describe('getTileHeight', () => {
