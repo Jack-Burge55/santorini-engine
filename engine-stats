@@ -1,3 +1,5 @@
 Engine stats (1000 games each)
 
-RandomPlay vs greedyHeight : 6 - 994
+randomPlay vs greedyHeight : 6 - 994
+randomPlay vs minimax : 0 - 1000
+greedyHeight vs minimax: 76 - 924

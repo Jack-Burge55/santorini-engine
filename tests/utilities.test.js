@@ -2,6 +2,7 @@ import getBuilderLocations from "../src/utilities/getBuilderLocations.js"
 import validBuilds from "../src/utilities/validBuilds.js";
 import validMoves from "../src/utilities/validMoves.js";
 import getTileHeight from "../src/utilities/getTileHeight.js";
+import boardEvaluator from "../src/utilities/boardEvaluator.js";
 
 describe('getBuilderLocations', () => {
   it('should return an array of builder locations given player value', () => {
@@ -59,7 +60,7 @@ describe('validMoves', () => {
       [0, 2, 10, 1, 0],
       [0, 0, 0, 20, 11]]
       const playerValue = 20
-    const validMoveObject =
+    const validMovesObject =
       {
           0: {
               "location": [2, 2],
@@ -70,7 +71,7 @@ describe('validMoves', () => {
               "validMoves": [[3, 3], [3, 4], [4, 2]]
           },
       } 
-    expect(validMoves(playerValue, grid)).toEqual(validMoveObject)
+    expect(validMoves(playerValue, grid)).toEqual(validMovesObject)
   })
 
   it('should return an object of builders with locations and an array of valid moves, including winning move', () => {
@@ -80,7 +81,7 @@ describe('validMoves', () => {
     [0, 2, 10, 1, 0],
     [0, 0, 0, 20, 11]]
     const playerValue = 20
-  const validMoveObject =
+  const validMovesObject =
     {
         0: {
             "location": [2, 2],
@@ -91,7 +92,7 @@ describe('validMoves', () => {
             "validMoves": [[3, 3], [3, 4], [4, 2]]
         },
     } 
-  expect(validMoves(playerValue, grid)).toEqual(validMoveObject)
+  expect(validMoves(playerValue, grid)).toEqual(validMovesObject)
   })
 
   it('should not return a key value pair for a builder with no current valid moves', () => {
@@ -101,14 +102,14 @@ describe('validMoves', () => {
     [0, 2, 10, 3, 2],
     [0, 0, 0, 2, 20]]
     const playerValue = 20
-  const validMoveObject =
+  const validMovesObject =
     {
         0: {
             "location": [2, 2],
             "validMoves": [[1, 2], [2, 1], [2, 3]]
         }
     } 
-  expect(validMoves(playerValue, grid)).toEqual(validMoveObject)
+  expect(validMoves(playerValue, grid)).toEqual(validMovesObject)
   })
 })
 
@@ -132,4 +133,15 @@ describe('getTileHeight', () => {
   const tileLocation = [4, 4]
   expect(getTileHeight(tileLocation, grid)).toEqual(1)
 })
+})
+
+describe('boardEvaluator', () => {
+  it('should return an evaluation given the player value and grid', () => {
+      const grid = [[0, 0, 0, 0, 0],
+      [0, 4, 0, 3, 0],
+      [0, 0, 21, 0, 0],
+      [0, 2, 10, 1, 0],
+      [0, 0, 0, 20, 11]]
+    expect(boardEvaluator(20, grid)).toEqual(65)
+  })
 })

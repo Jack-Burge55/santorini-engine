@@ -2,24 +2,25 @@ import validMoves from "./utilities/validMoves.js";
 
 import randomPlay from "./engines/randomPlay.js";
 import greedyHeight from "./engines/greedyHeight.js";
+import minimax from "./engines/minimax.js";
 
-const gamesCount = 10
+const gamesCount = 1000
 const winCount = {
     10: 0,
     20: 0
 }
 const playerEngines = {
     10: randomPlay,
-    20: greedyHeight
+    20: minimax
 }
 
 for (let i = 0; i < gamesCount; i++) {
 
     let grid = [
-        [10, 3, 0, 0, 0],
-        [3, 20, 0, 20, 0],
         [0, 0, 0, 0, 0],
-        [0, 0, 10, 0, 0],
+        [0, 20, 0, 20, 0],
+        [0, 0, 0, 0, 0],
+        [0, 10, 0, 10, 0],
         [0, 0, 0, 0, 0]]
 
     let winner
