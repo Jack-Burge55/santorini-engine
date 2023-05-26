@@ -2,6 +2,9 @@ import getBuilderLocations from "../src/utilities/getBuilderLocations.js"
 import validBuilds from "../src/utilities/validBuilds.js";
 import validMoves from "../src/utilities/validMoves.js";
 import getTileHeight from "../src/utilities/getTileHeight.js";
+import boardEvaluator from "../src/utilities/boardEvaluator.js";
+import possibleGridsArray from "../src/utilities/possibleGridsArray.js";
+import isGameOver from "../src/utilities/isGameOver.js";
 
 describe('getBuilderLocations', () => {
   it('should return an array of builder locations given player value', () => {
@@ -59,7 +62,7 @@ describe('validMoves', () => {
       [0, 2, 10, 1, 0],
       [0, 0, 0, 20, 11]]
       const playerValue = 20
-    const validMoveObject =
+    const validMovesObject =
       {
           0: {
               "location": [2, 2],
@@ -70,7 +73,7 @@ describe('validMoves', () => {
               "validMoves": [[3, 3], [3, 4], [4, 2]]
           },
       } 
-    expect(validMoves(playerValue, grid)).toEqual(validMoveObject)
+    expect(validMoves(playerValue, grid)).toEqual(validMovesObject)
   })
 
   it('should return an object of builders with locations and an array of valid moves, including winning move', () => {
@@ -80,7 +83,7 @@ describe('validMoves', () => {
     [0, 2, 10, 1, 0],
     [0, 0, 0, 20, 11]]
     const playerValue = 20
-  const validMoveObject =
+  const validMovesObject =
     {
         0: {
             "location": [2, 2],
@@ -91,7 +94,7 @@ describe('validMoves', () => {
             "validMoves": [[3, 3], [3, 4], [4, 2]]
         },
     } 
-  expect(validMoves(playerValue, grid)).toEqual(validMoveObject)
+  expect(validMoves(playerValue, grid)).toEqual(validMovesObject)
   })
 
   it('should not return a key value pair for a builder with no current valid moves', () => {
@@ -101,14 +104,14 @@ describe('validMoves', () => {
     [0, 2, 10, 3, 2],
     [0, 0, 0, 2, 20]]
     const playerValue = 20
-  const validMoveObject =
+  const validMovesObject =
     {
         0: {
             "location": [2, 2],
             "validMoves": [[1, 2], [2, 1], [2, 3]]
         }
     } 
-  expect(validMoves(playerValue, grid)).toEqual(validMoveObject)
+  expect(validMoves(playerValue, grid)).toEqual(validMovesObject)
   })
 })
 
@@ -131,5 +134,88 @@ describe('getTileHeight', () => {
     [0, 0, 0, 20, 11]]
   const tileLocation = [4, 4]
   expect(getTileHeight(tileLocation, grid)).toEqual(1)
+})
+})
+
+describe('boardEvaluator', () => {
+  it('should return an evaluation given the player value and grid', () => {
+      const grid = [[0, 0, 0, 0, 0],
+      [0, 4, 0, 3, 0],
+      [0, 0, 21, 0, 0],
+      [0, 2, 10, 1, 0],
+      [0, 0, 0, 20, 11]]
+      const result = boardEvaluator(20, grid)
+    expect(result).toBeGreaterThanOrEqual(65)
+    expect(result).toBeLessThanOrEqual(66)
+  })
+})
+
+describe('isGameOver', () => {
+  it('should return a false boolean if the grid has no builder on a 3 height tower', () => {
+      const grid = [[0, 0, 0, 0, 0],
+      [0, 4, 0, 3, 0],
+      [0, 0, 21, 0, 0],
+      [0, 2, 10, 1, 0],
+      [0, 0, 0, 20, 11]]
+    expect(isGameOver(grid)).toEqual(false)
+  })
+
+  it('should return a true boolean if the grid has no builder on a 3 height tower', () => {
+    const grid = [[0, 0, 0, 0, 0],
+    [0, 4, 0, 3, 0],
+    [0, 0, 23, 0, 0],
+    [0, 2, 11, 1, 0],
+    [0, 0, 0, 20, 11]]
+  expect(isGameOver(grid)).toEqual(true)
+})
+})
+
+describe('possibleGridsArray', () => {
+  it('should return an array of possible grids after move and build given player value and grid', () => {
+      const grid = [[0, 0, 0, 0, 0],
+      [0, 4, 0, 3, 0],
+      [0, 0, 1, 0, 0],
+      [0, 2, 10, 1, 0],
+      [20, 4, 4, 0, 11]]
+      const expectedArray = [
+        [
+          [ 0, 0, 0, 0, 0 ],
+          [ 0, 4, 0, 3, 0 ],
+          [ 1, 0, 1, 0, 0 ],
+          [ 20, 2, 10, 1, 0 ],
+          [ 0, 4, 4, 0, 11 ]
+        ],
+        [
+          [ 0, 0, 0, 0, 0 ],
+          [ 0, 4, 0, 3, 0 ],
+          [ 0, 1, 1, 0, 0 ],
+          [ 20, 2, 10, 1, 0 ],
+          [ 0, 4, 4, 0, 11 ]
+        ],
+        [
+          [ 0, 0, 0, 0, 0 ],
+          [ 0, 4, 0, 3, 0 ],
+          [ 0, 0, 1, 0, 0 ],
+          [ 20, 3, 10, 1, 0 ],
+          [ 0, 4, 4, 0, 11 ]
+        ],
+        [
+          [ 0, 0, 0, 0, 0 ],
+          [ 0, 4, 0, 3, 0 ],
+          [ 0, 0, 1, 0, 0 ],
+          [ 20, 2, 10, 1, 0 ],
+          [ 1, 4, 4, 0, 11 ]
+        ]
+      ]
+    expect(possibleGridsArray(20, grid)).toEqual(expectedArray)
+  })
+
+  it('should return an empty array of possible grids after move and build given trapped player value and grid', () => {
+    const grid = [[0, 0, 0, 0, 0],
+    [0, 4, 0, 3, 0],
+    [0, 0, 1, 0, 0],
+    [4, 2, 10, 1, 0],
+    [20, 4, 4, 0, 11]]
+  expect(possibleGridsArray(20, grid)).toEqual([])
 })
 })
