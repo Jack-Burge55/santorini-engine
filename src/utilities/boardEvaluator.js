@@ -9,7 +9,7 @@ import validMoves from "./validMoves.js";
 //       [0, 0, 21, 0, 0],
 //       [0, 2, 10, 1, 0],
 //       [0, 0, 0, 20, 11]]
-// would return: 65
+// would return between 65 and 66
 
 const boardEvaluator = (playerValue, grid) => {
 
@@ -19,7 +19,8 @@ const boardEvaluator = (playerValue, grid) => {
     const currentHeightScoreModifier = 500
     const moveUpScore = 75
     const moveLevelScore = 5
-    let boardRating = 0
+    // boardRating begins between 0 and 1 to break draws thus preventing tendency towards top left moves
+    let boardRating = Math.random()
 
     // get array of players
     let largestValue = 0

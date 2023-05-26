@@ -4,13 +4,13 @@ import randomPlay from "./engines/randomPlay.js";
 import greedyHeight from "./engines/greedyHeight.js";
 import minimax from "./engines/minimax.js";
 
-const gamesCount = 1000
+const gamesCount = 20
 const winCount = {
     10: 0,
     20: 0
 }
 const playerEngines = {
-    10: randomPlay,
+    10: greedyHeight,
     20: minimax
 }
 
